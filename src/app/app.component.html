@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row pt-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="mb-0">Total parking slots - {{totalSlots}}</p>
+        <p class="mb-0">Available parking slots - {{availableSlots}}</p>
+      </div>
+      <div class="col-lg-6 text-end">
+        <button type="button" class="btn btn-primary">Query Data</button>
+        <button type="button" class="btn btn-secondary ms-3" data-bs-toggle="modal" data-bs-target="#addCar">Park a car</button>
+      </div>
+      <div class="col-12 pt-5">
+        <table class="table pt-5">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Car no</th>
+              <th>color</th>
+              <th>Slot no</th>
+              <th>Date Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of carData; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{data?.carNumber}}</td>
+              <td>{{data?.carColor}}</td>
+              <td>{{data?.slotNo}}</td>
+              <td>{{data?.date | date: 'dd/MM/yyyy'}} , {{data?.date | date :'h:mm a'}}</td>
+              <td><button class="btn btn-sm btn-primary" (click)="removeCar(data.slotNo)" type="button">Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addCar" tabindex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-content p-5">
+        <div class="d-flex justify-content-between px-3">
+          <h2>Pick Car</h2>
+          <button class="btn" type="button" #closeButton data-bs-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <form action="" [formGroup]="addCar" (ngSubmit)="addNewCar()">
+            <div class="form-group">
+              <label for="" class="w-100 d-block">Enter the car number</label>
+              <input type="text" class="w-100" placeholder="car number" formControlName="carNumber">
+            </div>
+            <div class="form-group pt-3">
+              <label for="" class="w-100 d-block">Enter the car color</label>
+              <input type="text" class="w-100" placeholder="car color" formControlName="carColor">
+            </div>
+            <div class="text-danger" *ngIf="errorMessage">Please enter the required information</div>
+            <button type="submit" class="btn-primary mt-3">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
