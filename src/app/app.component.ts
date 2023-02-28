@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormControlName, Validators } from '@angular/forms';
-import * as $ from 'jquery';
 
 export interface carInfo{
   carNo: string,
